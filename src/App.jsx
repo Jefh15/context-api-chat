@@ -1,6 +1,9 @@
 
 // importo mi context
 import React from "react";
+// importo mi componente
+import Navbar from "./components/Navbar";
+// importo mi Provider
 import { ChatContext } from "./context/ChatProvider";
 
 function App() {
@@ -12,6 +15,7 @@ function App() {
 
   return (
     <div>
+      <Navbar />
       Chat {saludo}
     </div>
   );
