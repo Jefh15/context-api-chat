@@ -1,9 +1,26 @@
 import React from 'react'
+
+
+// importo mi contexto
 import { ChatContext } from '../context/ChatProvider'
 
 const Navbar = () => {
 
-    // const { usuario, iniciarSesion, cerrarSesion } = React.useContext(ChatContext)
+    // de mi contexto obtengo los props, hago una desestructuracion
+    // useContext ---> le paso mi contexto
+    const {
+        usuario,
+        iniciarSesion,
+        cerrarSesion
+    } = React.useContext(ChatContext)
+
+
+
+
+
+
+
+
 
     return (
         // creo un navbar
@@ -14,30 +31,36 @@ const Navbar = () => {
             <div>
 
                 {/* CREO MI CONDICION */}
-                {/* {
-                    usuario.activo ? ( */}
+                {
+                    usuario.estado ? (
 
-                {/* CREO MI BOTON */}
-                <button
-                    // clase del boton
-                    className="btn btn-outline-success my-2 my-sm-0 mr-2"
-                // onClick={cerrarSesion}
-                >
-                    Salir
-                </button>
-                {/* ) : ( */}
+                        // USUARIO LOGEADO
 
-                {/* CREO MI BOTON */}
-                <button
-                    className="btn btn-outline-danger my-2 my-sm-0"
-                // onClick={iniciarSesion}
-                >
-                    Acceder
-                </button>
-                {/* )
-                } */}
+                        // {/* CREO MI BOTON */ }
+                        < button
+                            // clase del boton
+                            className="btn btn-outline-danger my-2 my-sm-0 mr-2"
+                            // creo mi metodo para cerrar sesion
+                            onClick={cerrarSesion}
+                        >
+                            Cerrar Sesion
+                        </button>
+                    ) : (
+
+                        // USUARIO NO LOGEADO
+
+                        // {/* CREO MI BOTON */ }
+                        < button
+                            className="btn btn-outline-success my-2 my-sm-0"
+                            // creo mi metodo para iniciar sesion
+                            onClick={iniciarSesion}
+                        >
+                            Iniciar Sesion
+                        </button>
+                    )
+                }
             </div>
-        </nav>
+        </nav >
     )
 }
 
