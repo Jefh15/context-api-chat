@@ -9,16 +9,24 @@ import { ChatContext } from "./context/ChatProvider";
 function App() {
 
   // hago destructuring
-  const { saludo } = React.useContext(ChatContext)
+  const { usuario } = React.useContext(ChatContext)
 
 
 
-  return (
-    <div>
+  // si usuario es distinto de null ---> osea usuario no es null
+  return usuario !== null ? (
+    // devuelva todo esto
+    (<div>
       <Navbar />
-      Chat {saludo}
+      Chat
+    </div>)
+  ) : (
+    // si viene vacio diga cargando
+    // cada vez que actualizamos el sitio dira cargando
+    <div>
+      Cargando...
     </div>
-  );
+  )
 }
 
 export default App;
