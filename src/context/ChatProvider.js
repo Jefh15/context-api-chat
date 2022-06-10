@@ -28,7 +28,7 @@ const ChatProvider = (props) => {
     // creo el estado para poder guardar mi usuario
     // inicializo mi usuario ---> dataUsuario
     const [usuario, setUsuario] = useState(dataUsuario)
-    // creo el estado para poder guardar mis mensajes
+    // creo el estado para poder guardar mis mensajes por eso es de tipo array
     const [mensajes, setMensajes] = React.useState([])
 
 
@@ -73,6 +73,9 @@ const ChatProvider = (props) => {
                     estado: true
                 })
 
+                // una vez que el usuario se detecte cargo todos los mensajes
+                cargarMensajes()
+
             } else {
                 // SI EL USUARIO NO ESTA LOGEADO
                 // si el usuario NO EXISTE
@@ -113,9 +116,20 @@ const ChatProvider = (props) => {
 
     // metodo para cargar los mensajes
     const cargarMensajes = () => {
-        db.collection('messages').orderBy('fecha')
+
+        // db --- >de la base de datos
+        // .collection('nombreColeccion') ---> de mi coleccion
+        //.orderBy('fecha') --> ordena por fecha
+        // .onSnapshot() --> para detectar en nuestra base de datos en tiempo real nuestra coleccion
+        // con el snapshot con cada mensaje nuevo refreca la coleccion y se actualiza nuestro array de datos de mensajes
+        db.collection('chat')
+            .orderBy('fecha')
+            // query --> toda la coleccion
             .onSnapshot(query => {
+                // para pasar toda la data
+                // query.docs.map(item => item.data()) ---> es nuestro recorrido
                 const arrayMensajes = query.docs.map(item => item.data())
+                // guardo mis datos de los mensajes en el estado
                 setMensajes(arrayMensajes)
             })
     }
@@ -123,14 +137,24 @@ const ChatProvider = (props) => {
 
 
     // metodo para agregar mensajes
-    const agregarMensaje = async (uid, texto) => {
+    // recibo como parametro el uid y el texto
+    const agregarMensajes = async (uidChat, textoInput) => {
+
+        // 
         try {
+
+            // hago una peticion
+            // db ---> en mi base de datos de firebase
+            // .collection('nombreColeccion') ---> en mi coleccion
+            // .add() ---> agrega
             await db.collection('messages').add({
-                uid: uid,
-                texto: texto,
-                fecha: Date.now()
+                // con este objeto
+                fecha: Date.now(),
+                texto: textoInput,
+                uid: uidChat
             })
         } catch (error) {
+            // pinto los errores
             console.log(error)
         }
     }
@@ -150,7 +174,7 @@ const ChatProvider = (props) => {
                 iniciarSesion,
                 cerrarSesion,
                 mensajes,
-                agregarMensaje
+                agregarMensajes
             }}
         >
             {/* enviamos los hijos */}
