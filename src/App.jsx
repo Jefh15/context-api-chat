@@ -1,6 +1,7 @@
 
 // importo mi context
 import React from "react";
+import Chat from "./components/Chat";
 // importo mi componente
 import Navbar from "./components/Navbar";
 // importo mi Provider
@@ -18,7 +19,21 @@ function App() {
     // devuelva todo esto
     (<div>
       <Navbar />
-      Chat
+      {/* El chat se va a mostrar 
+      solo si el usuario esta activo,
+      caso contrario debe moestrar mensaje que acceda */}
+      {
+        usuario.estado ? (
+          <Chat />
+        ) : (
+          // CASO DE QUE NO ESTE LOGEADO, MUESTRE MENSAJE DEBES INICIAR SESION
+          <div
+            className="lead text-center mt-5"
+          >
+            Debes iniciar sesión
+          </div>
+        )
+      }
     </div>)
   ) : (
     // si viene vacio diga cargando
