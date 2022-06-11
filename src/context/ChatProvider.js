@@ -38,6 +38,8 @@ const ChatProvider = (props) => {
     useEffect(() => {
 
         detectarUsuario()
+        // comentario de eslint para que no nos arroje un error 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
 
         // [] ---> para que se ejecute solo una vez
     }, [])
