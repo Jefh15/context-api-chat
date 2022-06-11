@@ -13,10 +13,38 @@ const Chat = () => {
     // hago destructuring para poder llamar los metodos
     const { mensajes, usuario } = React.useContext(ChatContext)
 
+    // para poder hacer que mi ultimo mensaje tenga un ref, igual cuando se refresque mi sitio aparezca el scroll en el ultimo mensaje
+    const refZonaChat = React.useRef(null)
+
+
+    // cada vez que se cargue el sitio
+    React.useEffect(() => {
+
+        // muestro las propiedades
+        // console.log(refZonaChat)
+        // scrollTop ---> donde empieza de 0
+        // scrollHeight ---> donde llega de alto
+        // refZonaChat.current.scrollTop ----> nuestro scrollTop va a tener la misma altura que nuestro refZonaChat.current.scrollHeight
+        refZonaChat.current.scrollTop = refZonaChat.current.scrollHeight
+
+        // [mensajes] ---> cada que se detecte un nuevo mensaje se haga esa comprobacion
+    }, [mensajes])
+
+
 
     return (
         // px-2 --> para que no se nos pegue al costado derecho y izquierdo
-        <div className='mt-3 px-2 '>
+        <div
+            className='mt-3 px-2 '
+            style={{
+                // estilo
+                height: '75vh',
+                // se cree el scroll
+                overflowY: 'scroll'
+            }}
+            // hago al referencia
+            ref={refZonaChat}
+        >
 
             {/* HAGO MI RECORRIDO */}
             {

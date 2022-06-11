@@ -119,7 +119,7 @@ const ChatProvider = (props) => {
 
         // db --- >de la base de datos
         // .collection('nombreColeccion') ---> de mi coleccion
-        //.orderBy('fecha') --> ordena por fecha
+        // .orderBy('fecha') --> ordenar por fecha
         // .onSnapshot() --> para detectar en nuestra base de datos en tiempo real nuestra coleccion
         // con el snapshot con cada mensaje nuevo refreca la coleccion y se actualiza nuestro array de datos de mensajes
         db.collection('chat')
