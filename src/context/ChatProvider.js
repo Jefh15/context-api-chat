@@ -138,7 +138,7 @@ const ChatProvider = (props) => {
 
     // metodo para agregar mensajes
     // recibo como parametro el uid y el texto
-    const agregarMensajes = async (uidChat, textoInput) => {
+    const agregarMensaje = async (uidChat, textoInput) => {
 
         // 
         try {
@@ -147,7 +147,7 @@ const ChatProvider = (props) => {
             // db ---> en mi base de datos de firebase
             // .collection('nombreColeccion') ---> en mi coleccion
             // .add() ---> agrega
-            await db.collection('messages').add({
+            await db.collection('chat').add({
                 // con este objeto
                 fecha: Date.now(),
                 texto: textoInput,
@@ -174,7 +174,7 @@ const ChatProvider = (props) => {
                 iniciarSesion,
                 cerrarSesion,
                 mensajes,
-                agregarMensajes
+                agregarMensaje
             }}
         >
             {/* enviamos los hijos */}
